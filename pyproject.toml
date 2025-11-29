@@ -1,0 +1,11 @@
+[project]
+name = "balikovna-brother"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "pymupdf>=1.24.0",
+    "pillow>=10.0.0",
+    "brother-ql-next>=0.11.4",
+]
