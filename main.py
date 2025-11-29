@@ -55,10 +55,15 @@ def extract_top_left_quarter(
 
     # Split into top and bottom halves
     img_width, img_height = img.size
-    half_height = int(img_height / 1.8)
+    cut_height = int(img_height / 1.7)
 
-    top_half = img.crop((0, 0, img_width, half_height))
-    bottom_half = img.crop((0, half_height, img_width, img_height))
+    top_part = img.crop((0, 0, img_width, cut_height))
+    bottom_part = img.crop((0, cut_height, img_width, img_height))
+
+    # Pad bottom_part with white to match top_part height
+    padded_bottom = Image.new("RGB", (top_part.width, top_part.height), (255, 255, 255))
+    padded_bottom.paste(bottom_part, (0, 0))
+    bottom_part = padded_bottom
 
     # Generate output filenames
     base_name = pdf_path.stem
@@ -66,8 +71,8 @@ def extract_top_left_quarter(
     bottom_path = output_dir / f"{base_name}_bottom.png"
 
     # Save the images
-    top_half.save(top_path)
-    bottom_half.save(bottom_path)
+    top_part.save(top_path)
+    bottom_part.save(bottom_path)
 
     doc.close()
 

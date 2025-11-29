@@ -8,4 +8,8 @@ wheels/
 
 # Virtual environments
 .venv
+
 .python-version
+
+/*.pdf
+tests/fixtures/*.png
